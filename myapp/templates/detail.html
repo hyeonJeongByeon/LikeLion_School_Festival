@@ -1,0 +1,32 @@
+<h1>Detail page</h1>
+<br>
+
+<div class="container">
+    <h1>{{ board.title }}</h1>
+    <p>{{ board.pub_date }}</p>
+    <p>{{ board.body }}</p>
+
+    <br>
+    <a href="{% url 'comment_new' board.id %}">댓글 추가하기</a>
+
+    {% for comment in board.comments.all %}
+    <div class="comment">
+        <li>
+            {{ comment.busy }} / {{ comment.text }}<small>by <strong>{{ comment.author }}</strong>, {{ comment.created_at }}</small>, {{ comment.password }}
+        </li>
+    </div>
+
+    <div class="comment_delete">
+        <a href="{% url 'comment_delete' comment.id %}"> [x] </a>
+    </div>
+
+
+    {% empty %}
+    <p>아직 댓글이 없습니다! :</p>
+    {% endfor %}
+    
+    <hr>
+    <a href="{% url 'home' %}">돌아가기</a>
+</div>
+
+<!---->
